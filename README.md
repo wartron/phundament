@@ -15,7 +15,7 @@ It's goal is the seamless integration of Yii extensions and libraries bundled in
 
 ---
 
-**If you're looking for the Yii 2 version of Phundament please visit our [`4.0.x-dev` branch](https://github.com/phundament/app/tree/4.0).**
+**If you're looking for the Yii2 Framework version of Phundament please visit our [`4.0.x-dev` branch](https://github.com/phundament/app/tree/4.0).**
 
 ---
 
