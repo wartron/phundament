@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "125347949805cef03022beba3c015b76",
+    "hash": "84db5a44e184d972d0f861edd5f36825",
     "packages": [
         {
             "name": "bower-asset/admin-lte",
@@ -1341,6 +1341,61 @@
             "time": "2013-12-20 21:34:24"
         },
         {
+            "name": "neam/docker-php-toolkit",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neam/docker-php-toolkit.git",
+                "reference": "1037d2066b0da7103649cdbca2cbf7fc522060c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neam/docker-php-toolkit/zipball/1037d2066b0da7103649cdbca2cbf7fc522060c2",
+                "reference": "1037d2066b0da7103649cdbca2cbf7fc522060c2",
+                "shasum": ""
+            },
+            "bin": [
+                "server-config-generator/generate-php-config.sh",
+                "server-config-generator/generate-nginx-config.sh",
+                "server-config-generator/parse-composer-json.sh",
+                "docker-bash.sh",
+                "git-dist-clone.sh",
+                "replace-env-tokens.sh",
+                "run-worker-cmd.sh",
+                "setup-nginx-config.sh",
+                "setup-php-config.sh"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fredrik Wollsén",
+                    "email": "fredrik@neam.se",
+                    "homepage": "http://www.neam.se"
+                },
+                {
+                    "name": "Docker PHP Toolkit Contributors",
+                    "homepage": "https://github.com/neam/docker-php-toolkit/graphs/contributors"
+                },
+                {
+                    "name": "Open Source Community"
+                }
+            ],
+            "description": "Toolkit for maintaining a Docker-based \"one-process-per-container\" PHP-FPM/Nginx stack for 12-factor PHP apps.",
+            "homepage": "https://github.com/neam/docker-php-toolkit",
+            "keywords": [
+                "docker",
+                "local-dev",
+                "nginx",
+                "php",
+                "php-fpm"
+            ],
+            "time": "2015-03-06 07:17:50"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v0.9.5",
             "source": {
@@ -2006,7 +2061,8 @@
         "dmstr/yii2-adminlte-asset": 20,
         "dmstr/yii2-app-command": 0,
         "dmstr/yii2-log": 0,
-        "dmstr/yii2-migrate-command": 0
+        "dmstr/yii2-migrate-command": 0,
+        "neam/docker-php-toolkit": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -45,6 +45,7 @@
     "yiisoft/yii2-swiftmailer": "2.*"
   },
   "require-dev": {
+    "neam/docker-php-toolkit": "dev-develop",
     "yiisoft/yii2-apidoc": "2.*",
     "yiisoft/yii2-codeception": "2.*",
     "yiisoft/yii2-coding-standards": "2.*",
