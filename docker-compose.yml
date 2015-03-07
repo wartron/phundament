@@ -2,11 +2,13 @@
 # some configuration files generated based on env vars and composer.json.
 # /app is subsequently used as document root in php-fpm and nginx config
 project:
-  image: user/project:tag
+  image: phundament/source-code-image:latest
   volumes:
    - /app
   environment:
-    FOO: bar
+    DB_ENV_MYSQL_DATABASE: "prod-myapp"
+    APP_NAME: "My Application"
+    APP_ADMIN_PASSWORD: "YOU_HAVE_TO_CHANGE_THIS"
 
 # Includes a cmd to run commands defined by env vars so that administration tasks can be run by redeploying the container
 worker:
