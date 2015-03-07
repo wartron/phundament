@@ -1,16 +1,31 @@
-FROM phundament/app:development
+# Project source code data volume container docker image
+# --------------------------------
 
-# Prepare composer
-# /!\ Note: Please add your own API token to config.json; Phundament comes with a public token for your convenince, which may hit a rate limit
-ADD ./build/composer/config.json /root/.composer/config.json
+FROM neam/docker-php-toolkit-app-source-code-container-base:latest
 
-# Install packages first
-ADD ./composer.lock /app/composer.lock
-ADD ./composer.json /app/composer.json
-RUN /usr/local/bin/composer install --prefer-dist --optimize-autoloader
+# Add composer github token for faster downloads
+COPY composer.github.token composer.github.token
+RUN /usr/local/bin/composer config -g github-oauth.github.com "$(cat composer.github.token)" --no-interaction
 
-# Add application code
-ADD . /app
+# Run project-specific installation of dependencies (put the ones most likely to change at the bottom in order to re-use as many image layers as possible)
 
-# Easy PaaS setup
-ENV DB_ENV_MYSQL_DATABASE dev-myapp
+WORKDIR /app/
+COPY composer.lock /app/composer.lock
+COPY composer.json /app/composer.json
+RUN /usr/local/bin/composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
+
+WORKDIR /app/dna/
+COPY dna/composer.lock /app/dna/composer.lock
+COPY dna/composer.json /app/dna/composer.json
+RUN /usr/local/bin/composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
+
+WORKDIR /app/
+
+# Add source code to volume mount point
+COPY . /app
+
+# Env var with path to application directory
+ENV APP_DIR /app
+
+# Use a valid cmd that immediately exits for this data only container
+CMD ["true"]

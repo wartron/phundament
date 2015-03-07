@@ -1,0 +1,68 @@
+# Data only container that includes project source code at /app and generates
+# some configuration files generated based on env vars and composer.json.
+# /app is subsequently used as document root in php-fpm and nginx config
+project:
+  image: user/project:tag
+  volumes:
+   - /app
+  environment:
+    FOO: bar
+
+# Includes a cmd to run commands defined by env vars so that administration tasks can be run by redeploying the container
+worker:
+  image: php:5.6-cli
+  links:
+    - project
+  volumes_from:
+    - project
+  environment:
+    APP_DIR: '/app'
+    WORKER_CMD: '/bin/bash echo "Hello"'
+  command: "/bin/bash /app/vendor/neam/docker-php-toolkit/setup-php-config.sh /app/vendor/neam/docker-php-toolkit/run-worker-cmd.sh"
+
+# The php-fpm server for interpreting php code
+phpfpm:
+  image: php:5.6-fpm
+  links:
+    - project
+    - memcached
+  volumes_from:
+    - project
+  ports:
+   - "9000"
+  environment:
+    APP_DIR: '/app'
+    PHP_CONFD: '/usr/local/etc/php/conf.d'
+  command: "/bin/bash /app/vendor/neam/docker-php-toolkit/setup-php-config.sh php-fpm"
+
+# The nginx server for serving static files directly, cached contents via the memcached server and php files via the php-fpm server
+nginx:
+  image: nginx:1.7
+  links:
+    - project
+    - phpfpm
+    - memcached
+  volumes_from:
+    - project
+  ports:
+    - "80"
+    - "443"
+  environment:
+    APP_DIR: '/app'
+    NGINX_CONFD: '/etc/nginx/conf.d'
+    NGINX_ERROR_LOG_LEVEL: 'notice'
+    INDEX_DOCUMENT: 'index.php index.html'
+  command: "/bin/bash /app/vendor/neam/docker-php-toolkit/setup-nginx-config.sh nginx"
+
+# Memcached server for serving cached contents via the nginx-memcache plugin
+memcached:
+  image: memcached:1.4.22
+  ports:
+    - "11211"
+
+# Mailcatcher server for catching outgoing email when not in production
+mailcatcher:
+  image: nisenabe/mailcatcher
+  ports:
+    - "25"
+    - "1080"

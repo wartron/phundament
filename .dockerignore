@@ -1,5 +1,7 @@
 .git
 .vagrant
+.idea
+.env
 
 data
 vendor
