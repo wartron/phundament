@@ -72,6 +72,20 @@
     "asset-installer-paths": {
       "npm-asset-library": "vendor/npm",
       "bower-asset-library": "vendor/bower"
+    },
+    "server": {
+      "framework": "yii2",
+      "engines": {
+        "php": "5.6.5",
+        "nginx": "1.7.1"
+      },
+      "php-config": [
+        "upload_max_filesize=200M",
+        "post_max_size=200M",
+        "short_open_tag=on"
+      ],
+      "document-root": "web",
+      "index-document": "index.php"
     }
   },
   "config": {
