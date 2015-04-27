@@ -27,7 +27,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin(
         [
-            'brandLabel' => getenv('APP_ID'),
+            'brandLabel' => Yii::$app->params['appName'],
             'brandUrl'   => Yii::$app->homeUrl,
             'options'    => [
                 'class' => 'navbar navbar-fixed-top navbar-bold',
