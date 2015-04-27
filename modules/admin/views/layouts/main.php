@@ -36,7 +36,7 @@ dmstr\web\AdminLteAsset::register($this);
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= \Yii::$app->homeUrl ?>" class="logo">Phundament</a>
+        <a href="<?= \Yii::$app->homeUrl ?>" class="logo"><?= Yii::$app->params['appName'] ?></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -77,8 +77,7 @@ dmstr\web\AdminLteAsset::register($this);
                             <li class="user-header bg-light-blue">
                                 <?php echo \cebe\gravatar\Gravatar::widget(
                                     [
-                                        'email'   => 'xxx@example.com',
-                                        #\Yii::$app->user->identity->profile->gravatar_email,
+                                        'email'   => \Yii::$app->user->identity->profile->gravatar_email,
                                         'options' => [
                                             'alt' => \Yii::$app->user->identity->username
                                         ],
@@ -117,7 +116,7 @@ dmstr\web\AdminLteAsset::register($this);
                     <div class="pull-left image">
                         <?php echo \cebe\gravatar\Gravatar::widget(
                             [
-                                'email'   => \Yii::$app->user->identity->email,
+                                'email'   => \Yii::$app->user->identity->profile->gravatar_email,
                                 'options' => [
                                     'alt' => \Yii::$app->user->identity->username
                                 ],
@@ -143,16 +142,6 @@ dmstr\web\AdminLteAsset::register($this);
             </form>-->
             <!-- /.search form -->
             <?php
-            if (!\Yii::$app->user->isGuest) {
-                $menuItems = [
-                    ['label' => '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', 'url' => ['/admin']],
-                    ['label' => '<i class="fa fa-users"></i> <span>Users</span>', 'url' => ['/user/admin']],
-                    ['label' => '<i class="fa fa-cubes"></i> <span>Packages</span>', 'url' => ['/packaii']],
-                    ['label' => '<i class="fa fa-code"></i> <span>Code Generation</span>', 'url' => ['/gii']],
-                ];
-            } else {
-                $menuItems = [];
-            }
 
             // sidebar menu: : style can be found in sidebar.less
             echo Nav::widget(
@@ -175,10 +164,9 @@ dmstr\web\AdminLteAsset::register($this);
             <h1>
                 <small><?= $this->title ?></small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+            <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
         </section>
 
         <!-- Main content -->

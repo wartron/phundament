@@ -65,9 +65,20 @@ $config = [
         ],*/
         'user'  => [
             'class'        => 'dektrium\user\Module',
-            'layout'       => '@admin-views/layouts/main',
+            'layout'       => '@app/views/layouts/main',
             'defaultRoute' => 'profile',
-            'admins'       => ['admin']
+            'admins'       => ['admin'],
+            'enableFlashMessages' => false,
+            'modelMap' => [
+                'User' => 'app\models\User',
+                'Profile' => 'app\models\Profile',
+            ],
+            'controllerMap' => [
+                'admin' => [
+                    'class' => 'dektrium\user\controllers\AdminController',
+                    'layout' => '@admin-views/layouts/main',
+                ],
+            ],
         ],
     ],
     'params'     => [
@@ -108,7 +119,7 @@ $web = [
             'cookieValidationKey' => getenv('APP_COOKIE_VALIDATION_KEY'),
         ],
         'user'    => [
-            'identityClass' => 'dektrium\user\models\User',
+            'identityClass' => 'app\models\User',
         ],
     ]
 ];
