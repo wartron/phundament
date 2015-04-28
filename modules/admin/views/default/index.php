@@ -1,90 +1,44 @@
 <div class="row">
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>
-                    &nbsp;
-                </h3>
+<?php
+    echo \app\widgets\Smallbox::widget([
+        'h3'            => \app\models\User::find()->count(),
+        'message'       => 'Users',
+        'bg'            => 'aqua',
+        'icon'          => 'person',
+        'title'         => 'Manage',
+        'url'           => ['/user/admin'],
+    ]);
 
-                <p>
-                    Users
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person"></i>
-            </div>
-            <a href="<?= \yii\helpers\Url::to(['/user/admin']) ?>" class="small-box-footer">
-                Manage <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>
-                    <?= count(\Yii::$app->getModule('admin')->getControllers()) ?>
-                </h3>
+    echo \app\widgets\Smallbox::widget([
+        'h3'            => count(\Yii::$app->getModule('admin')->getControllers()),
+        'message'       => 'Application Controllers',
+        'bg'            => 'primary',
+        'icon'          => 'home',
+        'title'         => 'Homepage',
+        'url'           => ['/'],
+    ]);
 
-                <p>
-                    Application Controllers
-                </p>
-            </div>
-            <div class="icon bg-">
-                <i class="ion ion-home"></i>
-            </div>
-            <a href="<?= \yii\helpers\Url::to(['/']) ?>" class="small-box-footer">
-                Homepage <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-gray">
-            <div class="inner">
-                <h3>
-                    <?= count(\Yii::$app->getModules()) ?>
-                </h3>
+    echo \app\widgets\Smallbox::widget([
+        'h3'            => count(\Yii::$app->getModules()),
+        'message'       => 'Modules',
+        'bg'            => 'gray',
+        'icon'          => 'stats-bars',
+        'title'         => 'Browse Packages',
+        'url'           => 'http://packagist.com',
+    ]);
 
-                <p>
-                    Modules
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="<?= \yii\helpers\Url::to('http://packagist.com') ?>" class="small-box-footer" target="_blank">
-                Browse Packages <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
+    echo \app\widgets\Smallbox::widget([
+        'h3'            => YII_ENV,
+        'message'       => getenv('APP_VERSION'),
+        'bg'            => strstr(getenv('APP_VERSION'),'dirty') ? 'orange' : 'green',
+        'icon'          => 'pie-graph',
+        'title'         => 'Application Configuration',
+        'url'           => ['view-config'],
+    ]);
 
-    </div>
-    <!-- ./col -->
 
-    <div class="col-md-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-<?= strstr(getenv('APP_VERSION'),'dirty')?'orange':'green' ?>">
-            <div class="inner">
-                <h3>
-                    <?= YII_ENV ?>
-                </h3>
+?>
 
-                <p>
-                    <?= getenv('APP_VERSION') ?>
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="<?= \yii\helpers\Url::to(['view-config']) ?>" class="small-box-footer">
-                Application Configuration <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-    <!-- ./col -->
 </div>
 
 <div class="row">
