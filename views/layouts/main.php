@@ -50,8 +50,13 @@ AppAsset::register($this);
                 'url'   => ['/user/profile/show', 'id' => \Yii::$app->user->id],
             ];
             $menuItems[] = [
+                'label' => '<i class="glyphicon glyphicon-cog"></i>',
+                'url'   => ['/user/settings/profile'],
+            ];
+            $menuItems[] = [
                 'label' => '<i class="glyphicon glyphicon-dashboard"></i>',
                 'url'   => ['/admin'],
+                'visible' => \Yii::$app->user->identity->isAdmin
             ];
             $menuItems[] = [
                 'label'       => '<i class="glyphicon glyphicon-log-out"></i>',
