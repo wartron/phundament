@@ -41,7 +41,7 @@ class AppAsset extends AssetBundle
         // Touch the asset folder with the highest mtime of all contained files
         // This will create a new folder in web/assets for every change and request
         // made to the app assets.
-        if (YII_ENV_DEV) {
+        if (false && YII_ENV_DEV) { //TODO: FIX PERMISSIONS
             $files  = FileHelper::findFiles(\Yii::getAlias($this->sourcePath));
             $mtimes = [];
             foreach ($files AS $file) {

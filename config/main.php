@@ -65,7 +65,7 @@ $config = [
         ],*/
         'user'  => [
             'class'        => 'dektrium\user\Module',
-            'layout'       => '@app/views/layouts/main',
+            'layout'       => '@app/views/layouts/container',
             'defaultRoute' => 'profile',
             'admins'       => ['admin'],
             'enableFlashMessages' => false,
