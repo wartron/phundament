@@ -73,12 +73,6 @@ $config = [
                 'User' => 'app\models\User',
                 'Profile' => 'app\models\Profile',
             ],
-            'controllerMap' => [
-                'admin' => [
-                    'class' => 'dektrium\user\controllers\AdminController',
-                    'layout' => '@admin-views/layouts/main',
-                ],
-            ],
         ],
     ],
     'params'     => [
@@ -121,9 +115,18 @@ $web = [
         'user'    => [
             'identityClass' => 'app\models\User',
         ],
+    ],
+    'modules' => [
+        'user' => [
+            'controllerMap' => [
+                'admin' => [
+                    'class' => 'dektrium\user\controllers\AdminController',
+                    'layout' => '@admin-views/layouts/main',
+                ],
+            ],
+        ]
     ]
 ];
-
 
 $console = [
     'controllerNamespace' => 'app\commands',
